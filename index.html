@@ -1,1 +1,135 @@
-Hello World
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="layout.css">
+    <link rel="stylesheet" type="text/css" href="css/ferrous-styles.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <title>Lektra Labs</title>
+  </head>
+  <body>
+    <div class="grid grid--direction-column grid--align-center grid--align-content-center grid--bleed hero-container">
+      <div class="grid--align-center grid--align-content-center text-centered">
+        <h1>Lektra Labs</h1>
+        <p class="intro">Building thoughtful tools for a healthy tomorrow</p>
+      </div>
+    </div>
+
+    <div class="about-container">
+      <div class="content-container">
+        <section class="text-centered">
+          <p>
+            Lektra Labs is made up of athletes, software engineers and designers dedicated to making the best health and fitness products available. Our mission is to help you build healthy habits for life. We hope you enjoy using our products and want to hear from you.
+          </p>
+          <div>
+            <a id="contactUsButton" href="index.html" class="button-link">Contact Us</a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row early-access">
+        <!-- CONTACT MODAL -->
+        <div id="contactModal" class="modal fade" tabindex="-1"
+             role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button id="modalCloseBtn" type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="contactModalLabel">Thank you for your interest in Lektra Labs!</h4>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid bd-example-row">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p>Thank you!</p>
+                      <p>
+                        We're committed to building the best sports and fitness
+                        tracking apps and we want to hear from you.
+                      </p>
+                      <div class="form-group">
+                        <p>
+                          <label for="email">Email Address:</label>
+                          <input id="email" type="text" value="" />
+                        </p>
+                        <p>
+                          <label for="comments">
+                            Comments, questions:
+                          </label>
+                          <textarea class="form-control" id="comments" rows="3"></textarea>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button id="sendBtn" type="button" class="btn btn-primary"
+                        data-toggle="modal" data-target="#contactModal">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase-database.js"></script>
+    <script>
+      var appKey = 'aad4c27d-5b08-4722-a5a8-b62c15f80ec7';
+      firebase.initializeApp({
+        apiKey: "AIzaSyBntP24JsXU_xSer-iWTQrV5hHbkOeW0bg",
+        authDomain: "lektra-web.firebaseapp.com",
+        databaseURL: "https://lektra-web.firebaseio.com"
+      });
+      function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      }
+      function reset() {
+        $('#email').val('');
+        $('#comment').val('');
+        $('#contactModal').modal('hide');
+      }
+      function createContact(email, comment) {
+        return firebase.database().ref('contacts/').push({
+          appKey: appKey,
+          email: email,
+          timestamp: (new Date()).getTime(),
+          comment: comment
+        });
+      }
+      function onClickContactUs() {
+        $('#contactModal').modal('show');
+      }
+      function onClickSend() {
+        var email = $('#email').val();
+        var comment = $('#comment').val().trim();
+        if ( validateEmail(email) ) {
+          createContact(email, comment);
+        }
+      }
+      function onClickOk() {
+        reset();
+      }
+      /* -- */
+      $(document).ready(function() {
+        $('#contactUsButton').click(function(e) {
+          e.preventDefault();
+          onClickContactUs();
+        });
+        $('#sendButton').click(function() { onClickSend(); });
+        $('#okButton').click(function() { onClickOk(); });
+        reset();
+      });
+      /* -- */
+    </script>
+  </body>
+</html>

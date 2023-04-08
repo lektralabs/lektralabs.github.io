@@ -1,0 +1,100 @@
+/* CSS Document */
+
+body {
+	margin:0px; padding:0px;
+	text-align:center;
+	/* background-color:#333333; */
+	}
+	
+p {
+	font:20px verdana, arial, helvetica, sans-serif;
+	/* font:11px/20px verdana, arial, helvetica, sans-serif; */
+	
+	padding:0px;
+	}
+
+
+.topbar {
+	background-image:url(images/logo.gif);
+	background-repeat:no-repeat;
+	width:200px;
+	margin:0px auto;
+	margin-top:30px;
+	text-align:right;
+	text-indent:200px;
+	padding:5px;
+	border: 2px solid #aaaaaa;
+	background-color:#fff;
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	height:50px; /* the correct height */
+	}
+
+.content {
+	margin:30px 250px 50px 30px;
+	padding-top:20px;
+	background-color:#fff;
+	border: 1px solid #990000;
+/*	background-image:url(images/LEKTRA-remote-cam-unit-whi9.jpg); */
+	background-repeat:no-repeat;
+	background-position:top right;
+	
+	}
+.content h1 {
+font-size:18px;
+text-align:center;
+margin-right:300px;
+	}
+.content li {
+margin-right:380px;
+margin-left:50px;
+text-align:left;
+}
+.menu {
+	
+	position:absolute;
+	top:150px;
+	right:70px;
+	width:150px;
+	height:320px;
+	padding:0px;
+	background-color:#eeeeee;
+	border:1px dotted #000000;
+	/* Again, the ugly brilliant hack. */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width:150px;
+	}
+.menu ul {
+ font-size:16px;
+ text-align:left;
+ 
+ text-indent:none;
+ 
+ color: #990000;
+ 
+}
+.menu li {
+	list-style:none;
+	margin-left:0px;
+	font-size:12px;
+	padding:0px;
+	text-align:left;
+	text-indent:none;
+	
+}
+.menu2 {
+	
+	position:absolute;
+	top:470px;
+	right:70px;
+	width:150px;
+	height:150px;
+	padding:0px;
+	background-color:#eeeeee;
+	border:1px dotted #000000;
+	/* Again, the ugly brilliant hack. */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width:150px;
+	}
